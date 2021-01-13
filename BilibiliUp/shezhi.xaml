@@ -1,0 +1,119 @@
+﻿<Window x:Class="BilibiliUp.shezhi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BilibiliUp"
+        xmlns:pu="clr-namespace:Panuon.UI.Silver;assembly=Panuon.UI.Silver"
+        mc:Ignorable="d"
+        Title="dengru" Height="600" Width="350" AllowsTransparency="True" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen">
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="Black" Opacity="0.5" Grid.Row="0" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="7"/>
+        <WrapPanel Height="30" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top"
+                   MouseMove="TitleBar_MouseMove" 
+                   MouseDown="TitleBar_MouseDown" Background="Transparent" DockPanel.Dock="Top">
+            <Button x:Name="btn_max" Margin="320,5,0,0" Background="Transparent" Width="25" Height="25" Click="btn_close_Click">
+                <Image Source="tupian/guanbi.png" Height="17" VerticalAlignment="Center"/>
+            </Button>
+            <Button x:Name="btn_ban" Margin="290,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_close_Click">
+                <Image Source="tupian/bangzhu.png" Height="17" VerticalAlignment="Center"/>
+            </Button>
+        </WrapPanel>
+
+        <TextBlock Text="你好，请设置" Foreground="White" FontSize="30" HorizontalAlignment="Center" Grid.Row="1"/>
+        <ScrollViewer Grid.Row="2" VerticalAlignment="Top">
+            <Grid Height="600" Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="UP主的uuid：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="UP主的uuid：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                </StackPanel>
+                <TextBlock Text="已经登入的账号：沙雕の方块" Grid.Row="2" Foreground="White" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="3" Margin="0,0,0,0"
+                    Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button Height="30" Width="120"  Click="Button_Click_1" Background="Transparent" BorderBrush="#0099FF"
+                       BorderThickness="1"  Foreground="#0099FF" Content="退出登入" Margin="0,0,0,0"/>
+                    <Button Height="30" Width="100"  Click="Button_Click" Background="#0099FF" BorderBrush="#0099FF"
+                       BorderThickness="1" Foreground="White" Content="登入" Margin="0,0,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Margin="0,0,0,0"
+                    Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock Text="当前应用版本号：1.1" Grid.Row="4" Foreground="White" VerticalAlignment="Center"/>
+                    <TextBlock Text="最后更新日期：2021/1/13" Grid.Row="4" Foreground="White" VerticalAlignment="Center"
+                               Margin="0,5,0,0"/>
+
+                    <Button Height="30" Width="120" HorizontalAlignment="Left"  Click="Button_Click_1" Background="Transparent" BorderBrush="#0099FF"
+                       BorderThickness="1"  Foreground="#0099FF" Content="检查更新" Margin="0,10,0,0"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5">
+                    <TextBlock Text="登录UID（DedeUserID）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                </StackPanel>
+                <StackPanel Grid.Row="6">
+                    <TextBlock Text="登录UID MD5值（DedeUserID__ckMd5）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                </StackPanel>
+                <StackPanel Grid.Row="7">
+                    <TextBlock Text="(过期时间 秒（Expires）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                </StackPanel>
+                <StackPanel Grid.Row="8">
+                    <TextBlock Text="登录token（SESSDATA）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                </StackPanel>
+                <StackPanel Grid.Row="9">
+                    <TextBlock Text="csrf（Bili_jct）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                </StackPanel>
+                <StackPanel Grid.Row="10">
+                    <TextBlock Text="csrf（Bili_jct）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+        <StackPanel Grid.Row="3" Margin="0,10,0,0"
+                    Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button Height="30"
+        Width="100"
+                    Click="Button_Click_1"
+        Background="Transparent"
+                    BorderBrush="#0099FF"
+                    BorderThickness="1"
+        Foreground="#0099FF"
+        Content="取消" Margin="0,0,0,0"/>
+            <Button Height="30"
+        Width="100"
+                    Click="Button_Click"
+        Background="#0099FF"
+                    BorderBrush="#0099FF"
+                    BorderThickness="1"
+        Foreground="White"
+        Content="保存" Margin="30,0,0,0"/>
+
+        </StackPanel>
+        <TextBlock Text="第三方Bilibili-UP挂件    Powered By 沙雕の方块" Foreground="White" 
+                   Width="300" TextWrapping="Wrap" TextAlignment="Center" FontSize="12" HorizontalAlignment="Center" Grid.Row="4"/>
+    </Grid>
+</Window>
