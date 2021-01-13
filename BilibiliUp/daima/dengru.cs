@@ -51,7 +51,7 @@ namespace BilibiliUp.daima
             tupian_mingzi = random.Next(0, 999999).ToString()+".png";
             FileStream fs = new FileStream(lujing + "二维码\\"+tupian_mingzi, FileMode.Create, FileAccess.Write, FileShare.ReadWrite);
             // 设置参数
-            request = WebRequest.Create("https://api.isoyu.com/qr/?m=2&e=H&p=10&url=" + url_er) as HttpWebRequest;
+            request = WebRequest.Create("https://api.isoyu.com/qr/?m=2&e=L&p=10&url=" + url_er) as HttpWebRequest;
             //发送请求并获取相应回应数据
             response = request.GetResponse() as HttpWebResponse;
             //直到request.GetResponse()程序才开始向目标网页发送Post请求
@@ -90,6 +90,8 @@ namespace BilibiliUp.daima
             request.Method = "POST";
             request.ContentType = "text/html;charset=UTF-8";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            var cookies = response.Headers.GetValues("Set-Cookie");
+
             Stream myResponseStream = response.GetResponseStream();
             StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.UTF8);
             string retString = myStreamReader.ReadToEnd();
@@ -101,8 +103,10 @@ namespace BilibiliUp.daima
             try
             {
                 string url = wai["data"]["url"].ToString();
+                return cookies;
+                
                 //成功
-                return gongju.huoqu_xinxi(url);
+                //return gongju.huoqu_xinxi(url);
             }
             catch
             {

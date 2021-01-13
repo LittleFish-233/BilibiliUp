@@ -15,7 +15,7 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Rectangle Fill="Black" Opacity="0.5" Grid.Row="0" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="7"/>
+        <Rectangle x:Name="rec1" Fill="Black" Opacity="0.5" Grid.Row="0" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="7"/>
         <WrapPanel Height="30" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top"
                    MouseMove="TitleBar_MouseMove" 
                    MouseDown="TitleBar_MouseDown" Background="Transparent" DockPanel.Dock="Top">
@@ -29,18 +29,22 @@
 
         <TextBlock Text="你好，请设置" Foreground="White" FontSize="30" HorizontalAlignment="Center" Grid.Row="1"/>
         <ScrollViewer Grid.Row="2" VerticalAlignment="Top">
-            <Grid Height="600" Margin="10,0,10,0">
+            <Grid Height="830" Width="290" Margin="20,0,20,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="55"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="45"/>
-                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="90"/>
                     <RowDefinition Height="65"/>
                     <RowDefinition Height="65"/>
                     <RowDefinition Height="65"/>
                     <RowDefinition Height="65"/>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="65"/>
                 </Grid.RowDefinitions>
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="UP主的uuid：" Foreground="White" Margin="0,0,0,10"/>
@@ -48,14 +52,14 @@
                 </StackPanel>
                 <StackPanel Grid.Row="1">
                     <TextBlock Text="UP主的uuid：" Foreground="White" Margin="0,0,0,10"/>
-                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                    <TextBox x:Name="textbox1" Height="30" Background="Transparent" Foreground="White" pu:TextBoxHelper.FocusedBorderBrush="White" pu:TextBoxHelper.FocusedShadowColor="White"/>
                 </StackPanel>
-                <TextBlock Text="已经登入的账号：沙雕の方块" Grid.Row="2" Foreground="White" VerticalAlignment="Center"/>
+                <TextBlock x:Name="textblock1" Text="已经登入的账号：" Grid.Row="2" Foreground="White" VerticalAlignment="Center"/>
                 <StackPanel Grid.Row="3" Margin="0,0,0,0"
                     Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Button Height="30" Width="120"  Click="Button_Click_1" Background="Transparent" BorderBrush="#0099FF"
+                    <Button x:Name="button1" Height="30" Width="120"  Click="button1_Click" Background="Transparent" BorderBrush="#0099FF"
                        BorderThickness="1"  Foreground="#0099FF" Content="退出登入" Margin="0,0,0,0"/>
-                    <Button Height="30" Width="100"  Click="Button_Click" Background="#0099FF" BorderBrush="#0099FF"
+                    <Button x:Name="button2" Height="30" Width="100"  Click="button2_Click" Background="#0099FF" BorderBrush="#0099FF"
                        BorderThickness="1" Foreground="White" Content="登入" Margin="0,0,0,0"/>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Margin="0,0,0,0"
@@ -64,32 +68,50 @@
                     <TextBlock Text="最后更新日期：2021/1/13" Grid.Row="4" Foreground="White" VerticalAlignment="Center"
                                Margin="0,5,0,0"/>
 
-                    <Button Height="30" Width="120" HorizontalAlignment="Left"  Click="Button_Click_1" Background="Transparent" BorderBrush="#0099FF"
+                    <Button Height="30" Width="120" HorizontalAlignment="Left"  Click="Button_Click_2" Background="Transparent" BorderBrush="#0099FF"
                        BorderThickness="1"  Foreground="#0099FF" Content="检查更新" Margin="0,10,0,0"/>
                 </StackPanel>
                 <StackPanel Grid.Row="5">
-                    <TextBlock Text="登录UID（DedeUserID）：" Foreground="White" Margin="0,0,0,10"/>
-                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                    <TextBlock x:Name="textblock2" Text="背景不透明度：13%" Grid.Row="4" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider x:Name="slider1" Width="290" Value="1.3" Margin="0,10,0,0" ValueChanged="slider1_ValueChanged"
+                             pu:SliderHelper.ThumbSize="17" pu:SliderHelper.ThemeBrush="White"
+                        Foreground="White" Background="Transparent" />
                 </StackPanel>
                 <StackPanel Grid.Row="6">
-                    <TextBlock Text="登录UID MD5值（DedeUserID__ckMd5）：" Foreground="White" Margin="0,0,0,10"/>
-                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                    <TextBlock x:Name="textblock3" Text="动画延迟时间：6.3 s" Grid.Row="4" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider  x:Name="slider2" Width="290" Value="6.3" Margin="0,10,0,0" ValueChanged="slider2_ValueChanged"
+                              pu:SliderHelper.ThumbSize="17" pu:SliderHelper.ThemeBrush="White"
+                        Foreground="White" Background="Transparent" />
                 </StackPanel>
                 <StackPanel Grid.Row="7">
-                    <TextBlock Text="(过期时间 秒（Expires）：" Foreground="White" Margin="0,0,0,10"/>
-                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                    <TextBlock x:Name="textblock4" Text="数据获取间隔时间：6.3 s" Grid.Row="4" Foreground="White" VerticalAlignment="Center"/>
+                    <Slider  x:Name="slider3" Width="290" Value="6.3" Margin="0,10,0,0" ValueChanged="slider3_ValueChanged"
+                              pu:SliderHelper.ThumbSize="17" pu:SliderHelper.ThemeBrush="White"
+                        Foreground="White" Background="Transparent" />
                 </StackPanel>
                 <StackPanel Grid.Row="8">
-                    <TextBlock Text="登录token（SESSDATA）：" Foreground="White" Margin="0,0,0,10"/>
-                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                    <TextBlock Text="登录UID（DedeUserID）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox  x:Name="textbox2" Height="30" Background="Transparent" Foreground="White" pu:TextBoxHelper.FocusedBorderBrush="White" pu:TextBoxHelper.FocusedShadowColor="White" />
                 </StackPanel>
                 <StackPanel Grid.Row="9">
-                    <TextBlock Text="csrf（Bili_jct）：" Foreground="White" Margin="0,0,0,10"/>
-                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                    <TextBlock Text="登录UID MD5值（DedeUserID__ckMd5）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox x:Name="textbox3"  Height="30" Background="Transparent" Foreground="White" pu:TextBoxHelper.FocusedBorderBrush="White" pu:TextBoxHelper.FocusedShadowColor="White"/>
                 </StackPanel>
                 <StackPanel Grid.Row="10">
+                    <TextBlock Text="过期时间 秒（Expires）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox x:Name="textbox4"  Height="30" Background="Transparent" Foreground="White" pu:TextBoxHelper.FocusedBorderBrush="White" pu:TextBoxHelper.FocusedShadowColor="White"/>
+                </StackPanel>
+                <StackPanel Grid.Row="11">
+                    <TextBlock Text="登录token（SESSDATA）：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox  x:Name="textbox5"  Height="30" Background="Transparent" Foreground="White" pu:TextBoxHelper.FocusedBorderBrush="White" pu:TextBoxHelper.FocusedShadowColor="White"/>
+                </StackPanel>
+                <StackPanel Grid.Row="12">
                     <TextBlock Text="csrf（Bili_jct）：" Foreground="White" Margin="0,0,0,10"/>
-                    <TextBox Height="30" Background="Transparent" Foreground="White" />
+                    <TextBox  x:Name="textbox6"  Height="30" Background="Transparent" Foreground="White" pu:TextBoxHelper.FocusedBorderBrush="White" pu:TextBoxHelper.FocusedShadowColor="White"/>
+                </StackPanel>
+                <StackPanel Grid.Row="13">
+                    <TextBlock Text="sid：" Foreground="White" Margin="0,0,0,10"/>
+                    <TextBox  x:Name="textbox7"  Height="30" Background="Transparent" Foreground="White" pu:TextBoxHelper.FocusedBorderBrush="White" pu:TextBoxHelper.FocusedShadowColor="White"/>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

@@ -14,7 +14,7 @@
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="200"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="140"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
@@ -31,70 +31,113 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Fill="Black" Opacity="0.2" Grid.Row="0" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="7"/>
+        <Rectangle x:Name="rec1" Fill="Black" Opacity="0.5" Grid.Row="0" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="7"/>
 
         <WrapPanel Height="40" Grid.ColumnSpan="7" Grid.RowSpan="2" Orientation="Horizontal"
                    MouseMove="TitleBar_MouseMove" 
                    MouseDown="TitleBar_MouseDown" Background="Transparent" DockPanel.Dock="Top">
-            <Button x:Name="btn_suo" Margin="480,5,0,0" Background="Transparent" Width="25" Height="25" Click="btn_min_Click">
+            <Button x:Name="btn_clo" Margin="570,5,0,0" Background="Transparent" Width="25" Height="25" Click="btn_close_Click">
+                <Image Source="tupian/guanbi.png" Height="17" VerticalAlignment="Center"/>
+            </Button>
+            <Button x:Name="btn_suo" Margin="480,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_suo_Click">
                 <Image Source="tupian/suo.png" Height="17" VerticalAlignment="Center"/>
             </Button>
-            <Button x:Name="btn_zhiding" Margin="510,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_min_Click">
+            <Button x:Name="btn_suo_1" Margin="480,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_suo_1_Click">
+                <Image Source="tupian/suo_1.png" Height="17" VerticalAlignment="Center"/>
+            </Button>
+            <Button x:Name="btn_zhiding" Margin="510,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_zhiding_Click">
                 <Image Source="tupian/zhiding.png" Height="15" VerticalAlignment="Center"/>
+            </Button>
+            <Button x:Name="btn_zhiding_1" Margin="510,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_zhiding_1_Click">
+                <Image Source="tupian/zhidixian.png" Height="17" VerticalAlignment="Center"/>
             </Button>
             <Button x:Name="btn_la" Margin="450,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_min_Click">
                 <Image Source="tupian/zoom.png" Height="17" VerticalAlignment="Center"/>
             </Button>
-            <Button x:Name="btn_clo" Margin="570,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_close_Click">
-                <Image Source="tupian/guanbi.png" Height="17" VerticalAlignment="Center"/>
-            </Button>
-            <Button x:Name="btn_she" Margin="540,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_close_Click">
+            <Button x:Name="btn_she" Margin="540,-25,0,0" Background="Transparent" Width="25" Height="25" Click="btn_she_Click">
                 <Image Source="tupian/shezhi.png" Height="17" VerticalAlignment="Center"/>
             </Button>
         </WrapPanel>
 
         <TextBlock Text="{Binding Mingzi,Mode=OneWay}" Foreground="White" Grid.Column="1" Grid.Row="1" FontSize="20" Grid.ColumnSpan="5"
                    HorizontalAlignment="Center"/>
-        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Center"
+       
+        <Grid Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Image Source="tupian/CN_bilibiliB_1.png" Height="90"/>
+                <TextBlock Text="{Binding Fenshishu,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="60" Margin="10,0,0,-8"/>
+            </StackPanel>
+            <Grid x:Name="grid1" Grid.Column="2" Margin="10,0,0,25" VerticalAlignment="Bottom">
+                <TextBlock x:Name="textblock2" Visibility="Collapsed" Text="-5" Foreground="#FF7575" FontSize="50" />
+                <TextBlock x:Name="textblock3" Visibility="Collapsed" Text="-5" Foreground="#21BC48" FontSize="50" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel  HorizontalAlignment="Center" Grid.Column="1"
                     Orientation="Horizontal">
-            <Image Source="tupian/CN_bilibiliB_1.png" Height="90"/>
-            <TextBlock Text="{Binding Fenshishu,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="60" Margin="10,0,0,-8"/>
-        </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Center"
-                    Orientation="Horizontal">
-            <TextBlock Text="{Binding Shiping_mingzi_shou,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
-            <Image Source="tupian/bofang_1.png" Height="25"  VerticalAlignment="Center" Margin="15,0,5,0"/>
-            <TextBlock Text="{Binding Bofanshu,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
-        </StackPanel>
+                <TextBlock Text="{Binding Shiping_mingzi_shou,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+                <Image Source="tupian/bofang_1.png" Height="25"  VerticalAlignment="Center" Margin="15,0,5,0"/>
+                <TextBlock Text="{Binding Bofanshu,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20"/>
+            </StackPanel>
+            <Grid x:Name="grid2" Grid.Column="2" Margin="10,0,0,10" VerticalAlignment="Bottom">
+            </Grid>
+        </Grid>
         <StackPanel Grid.Row="6" Grid.Column="2" 
                     Orientation="Horizontal">
             <Image Source="tupian/dianzan.png" Height="28" VerticalAlignment="Center" Margin="-5,0,0,0"/>
             <TextBlock Text="{Binding Dianzan,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20" Margin="5,0,0,0"/>
+            <Grid x:Name="grid3" Margin="10,-20,0,0" VerticalAlignment="Bottom">
+            </Grid>
         </StackPanel>
         <StackPanel Grid.Row="6" Grid.Column="3"  
                     Orientation="Horizontal">
             <Image Source="tupian/huaban25.png" Height="22" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Toubi,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20" Margin="10,0,0,0"/>
+            <Grid x:Name="grid4" Margin="10,-20,0,0" VerticalAlignment="Bottom">
+            </Grid>
+
         </StackPanel>
         <StackPanel Grid.Row="6" Grid.Column="4"  
                     Orientation="Horizontal">
             <Image Source="tupian/shoucang.png" Height="23" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Shoucang,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20" Margin="10,0,0,0"/>
+            <Grid x:Name="grid5" Margin="10,-20,0,0" VerticalAlignment="Bottom">
+            </Grid>
+
         </StackPanel>
         <StackPanel Grid.Row="8" Grid.Column="2"  
                     Orientation="Horizontal">
             <Image Source="tupian/pinglun.png" Height="17" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Pinglun,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20" Margin="10,0,0,0"/>
+            <Grid x:Name="grid6" Margin="10,-20,0,0" VerticalAlignment="Bottom">
+            </Grid>
+
         </StackPanel>
         <StackPanel Grid.Row="8" Grid.Column="3"
                     Orientation="Horizontal">
             <Image Source="tupian/danmushu.png" Height="20" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Danmu,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20" Margin="10,0,0,0"/>
+            <Grid x:Name="grid7" Margin="10,-20,0,0" VerticalAlignment="Bottom" >
+            </Grid>
+
         </StackPanel>
         <StackPanel Grid.Row="8" Grid.Column="4"  Margin="3,0,0,0"
                     Orientation="Horizontal">
             <Image Source="tupian/fenxiang_1.png" Height="18" VerticalAlignment="Center"/>
             <TextBlock Text="{Binding Fenxiang,Mode=OneWay}" Foreground="White" VerticalAlignment="Center" FontSize="20" Margin="20,0,0,0"/>
+            <Grid x:Name="grid8" Margin="10,-20,0,0" VerticalAlignment="Bottom" >
+            </Grid>
+
         </StackPanel>
 
     </Grid>

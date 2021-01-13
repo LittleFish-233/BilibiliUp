@@ -42,6 +42,22 @@ namespace BilibiliUp.daima
 
         public static string Bili_jct { get { return bili_jct; } }
         private static string bili_jct = "";
+        public static string Name { get { return name; } }
+        private static string name = "";
+        public static string Sid { get { return sid; } }
+        private static string sid = "";
+        public static bool Shifou_zhiding { get { return shifouz_zhiding; } }
+        private static bool shifouz_zhiding = false;
+        public static bool Shifou_suoding { get { return shifou_suoding; } }
+        private static bool shifou_suoding = false;
+        public static double Toumingdu { get { return toumingdu; } }
+        private static double toumingdu = 0.5;
+        public static double Donghua_shijian { get { return donghua_shijian; } }
+        private static double donghua_shijian = 3;
+        public static double Huoqu_jiange { get { return huoqu_jiange; } }
+        private static double huoqu_jiange = 10;
+
+
 
 
         private static bool shifou_zhengzai=false;
@@ -71,7 +87,14 @@ namespace BilibiliUp.daima
                       new JProperty("dedeUserID__ckMd5", dedeUserID__ckMd5),
                       new JProperty("expires", expires),
                       new JProperty("sESSDATA", sESSDATA),
-                      new JProperty("bili_jct", bili_jct)).ToString();
+                      new JProperty("bili_jct", bili_jct),
+                      new JProperty("name", name),
+                      new JProperty("sid", sid),
+                      new JProperty("shifouz_zhiding", shifouz_zhiding),
+                      new JProperty("shifou_suoding", shifou_suoding),
+                      new JProperty("toumingdu", toumingdu),
+                      new JProperty("donghua_shijian", donghua_shijian),
+                      new JProperty("huoqu_jiange", huoqu_jiange)).ToString();
             //保存到文件
             Directory.CreateDirectory(lujing);
             //新建文件
@@ -129,6 +152,34 @@ namespace BilibiliUp.daima
                     {
                         bili_jct = result[6];
                     }
+                    if (result[7] != "")
+                    {
+                        name = result[7];
+                    }
+                    if (result[8] != "")
+                    {
+                        sid = result[8];
+                    }
+                    if (result[9] != "")
+                    {
+                        shifouz_zhiding = bool.Parse(result[9]);
+                    }
+                    if (result[10] != "")
+                    {
+                        shifou_suoding = bool.Parse(result[10]);
+                    }
+                    if (result[11] != "")
+                    {
+                        toumingdu = double.Parse(result[11]);
+                    }
+                    if (result[12] != "")
+                    {
+                        donghua_shijian = double.Parse(result[12]);
+                    }
+                    if (result[13] != "")
+                    {
+                        huoqu_jiange = double.Parse(result[13]);
+                    }
                 }
                 catch
                 {
@@ -179,9 +230,16 @@ namespace BilibiliUp.daima
             var expires = json["expires"];
             var sESSDATA = json["sESSDATA"];
             var bili_jct = json["bili_jct"];
+            var name = json["name"];
+            var sid = json["sid"];
+            var shifouz_zhiding = json["shifouz_zhiding"];
+            var shifou_suoding = json["shifou_suoding"];
+            var toumingdu = json["toumingdu"];
+            var donghua_shijian = json["donghua_shijian"];
+            var huoqu_jiange = json["huoqu_jiange"];
 
             //保存结果
-            string[] re = new string[7];
+            string[] re = new string[14];
 
             re[0] = banben_.ToString();
             re[1] = up.ToString();
@@ -190,35 +248,102 @@ namespace BilibiliUp.daima
             re[4] = expires.ToString();
             re[5] = sESSDATA.ToString();
             re[6] = bili_jct.ToString();
+            re[7] = name.ToString();
+            re[8] = sid.ToString();
+            re[9] = shifouz_zhiding.ToString();
+            re[10] = shifou_suoding.ToString();
+            re[11] = toumingdu.ToString();
+            re[12] = donghua_shijian.ToString();
+            re[13] = huoqu_jiange.ToString();
             return re;
         }
-
+        /// <summary>
+        /// 退出登入 清空信息
+        /// </summary>
         public static void tuichudengru()
         {
             dedeUserID = "";
+            dedeUserID__ckMd5 = "";
+            expires = "";
+            sESSDATA = "";
+            bili_jct = "";
+            name = "";
+
             baocun_jiben();
         }
-
-        public static void xieru_dengru(string DedeUserID_,string DedeUserID__ckMd5_,string Expires_,string SESSDATA_,string bili_jct_)
+        /// <summary>
+        /// 写入登入后获取的信息
+        /// </summary>
+        /// <param name="sid_"></param>
+        /// <param name="DedeUserID_"></param>
+        /// <param name="DedeUserID__ckMd5_"></param>
+        /// <param name="SESSDATA_"></param>
+        /// <param name="bili_jct_"></param>
+        public static void xieru_dengru(string sid_,string DedeUserID_,string DedeUserID__ckMd5_,string SESSDATA_,string bili_jct_)
         {
+            //写入
+            dedeUserID = DedeUserID_;
+            dedeUserID__ckMd5 = DedeUserID__ckMd5_;
+            expires = "100000";
+            sESSDATA = SESSDATA_;
+            bili_jct = bili_jct_;
+            sid = sid_;
+            //获取用户名
+            string serviceAddress = "http://api.bilibili.com/x/space/acc/info?mid=" + gongju.fengli_id(dedeUserID); //请求地址
+            string retString = gongju.http_get(serviceAddress, huoqu_cook());
+
+            //解析json
+            var wai = (JObject)JsonConvert.DeserializeObject(retString);
+            name = wai["data"]["name"].ToString();
+
+            baocun_jiben();
+        }
+        /// <summary>
+        /// 获取 登入信息用于传递
+        /// </summary>
+        /// <returns></returns>
+        public static string[] huoqu_cook()
+        {
+            string[] jieguo = new string[5];  
+            jieguo[0] = sid;
+            jieguo[1] = DedeUserID;
+            jieguo[2] = DedeUserID__ckMd5;
+            jieguo[3] = SESSDATA;
+            jieguo[4] = bili_jct;
+
+            return jieguo;
+        }
+        /// <summary>
+        /// 修改信息
+        /// </summary>
+        /// <param name="up_"></param>
+        /// <param name="DedeUserID_"></param>
+        /// <param name="DedeUserID__ckMd5_"></param>
+        /// <param name="Expires_"></param>
+        /// <param name="SESSDATA_"></param>
+        /// <param name="bili_jct_"></param>
+        public static void xiugai(string up_,string DedeUserID_, string DedeUserID__ckMd5_, string Expires_, string SESSDATA_, string bili_jct_,string sid_,double toumingdu_,double donghua_shijian_,double huoqu_jiange_)
+        {
+            up = up_;
             dedeUserID = DedeUserID_;
             dedeUserID__ckMd5 = DedeUserID__ckMd5_;
             expires = Expires_;
             sESSDATA = SESSDATA_;
             bili_jct = bili_jct_;
+            toumingdu = toumingdu_;
+            donghua_shijian = donghua_shijian_;
+            huoqu_jiange = huoqu_jiange_;
+            sid = sid_;
 
             baocun_jiben();
         }
 
-        public static string[] huoqu_cook()
+        public static void xiugai(bool shifou_zhiding_,bool shifou_suoding_)
         {
-            string[] jieguo = new string[4];
-            jieguo[0] = DedeUserID;
-            jieguo[1] = DedeUserID__ckMd5;
-            jieguo[2] = SESSDATA;
-            jieguo[3] = bili_jct;
+            shifouz_zhiding = shifou_zhiding_;
+            shifou_suoding = shifou_suoding_;
 
-            return jieguo;
+            baocun_jiben();
         }
     }
 }

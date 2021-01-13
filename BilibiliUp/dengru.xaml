@@ -15,7 +15,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Rectangle Fill="Black" Opacity="0.5" Grid.Row="0" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="7"/>
+        <Rectangle x:Name="rec1" Fill="Black" Opacity="0.5" Grid.Row="0" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="7"/>
         <WrapPanel Height="30" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top"
                    MouseMove="TitleBar_MouseMove" 
                    MouseDown="TitleBar_MouseDown" Background="Transparent" DockPanel.Dock="Top">
@@ -29,7 +29,6 @@
                    Width="300" TextWrapping="Wrap" TextAlignment="Center" FontSize="14" HorizontalAlignment="Center" Grid.Row="2"/>
 
 
-        <Image x:Name="image2" Source="tupian/dengru.png"  Height="250" Grid.Row="3"/>
         <Image x:Name="image1"  Height="250" Grid.Row="3"/>
         <TextBlock x:Name="textblock1" Text="正在获取二维码" Foreground="White"
                    Width="300" TextWrapping="Wrap" TextAlignment="Center" FontSize="13" HorizontalAlignment="Center" Grid.Row="4"/>

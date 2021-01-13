@@ -56,13 +56,15 @@ namespace BilibiliUp.daima
             string serviceAddress = url; //请求地址
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(serviceAddress);
             request.Method = "GET";
-            request.CookieContainer = new CookieContainer();
-            request.CookieContainer.Add(new Cookie("DedeUserID", cook[0], "/", ".bilibili.com"));
-            request.CookieContainer.Add(new Cookie("DedeUserID__ckMd5", cook[1], "/", ".bilibili.com"));
-            request.CookieContainer.Add(new Cookie("SESSDATA", cook[2], "/", ".bilibili.com"));
-            request.CookieContainer.Add(new Cookie("bili_jct", cook[3], "/", ".bilibili.com"));
+            for (int i = 0; i < cook.Length; i++)
+            {
+                request.Headers.Add("Set-Cookie", cook[i]);
+            }
+            var cookies = request.Headers.GetValues("Set-Cookie");
+
             request.ContentType = "text/html;charset=UTF-8";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
             Stream myResponseStream = response.GetResponseStream();
             StreamReader myStreamReader = new StreamReader(myResponseStream, Encoding.UTF8);
             string retString = myStreamReader.ReadToEnd();
@@ -70,6 +72,29 @@ namespace BilibiliUp.daima
             myResponseStream.Close();
 
             return retString;
+        }
+
+        public static string fengli_id(string linshi)
+        {
+            string jieguo = "";
+            bool shifou_kaishi = false;
+            for(int i=0;i<linshi.Length;i++)
+            {
+                if(linshi[i]=='=')
+                {
+                    shifou_kaishi = true;
+                    continue;
+                }
+                if(linshi[i]==';')
+                {
+                    break;
+                }
+                if(shifou_kaishi==true)
+                {
+                    jieguo += linshi[i];
+                }
+            }
+            return jieguo;
         }
     }
 }

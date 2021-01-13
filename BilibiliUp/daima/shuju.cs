@@ -11,77 +11,76 @@ using System.Threading.Tasks;
 
 namespace BilibiliUp.daima
 {
-    public  class Shuju:INotifyPropertyChanged
+    public class Shuju : INotifyPropertyChanged
     {
         /// <summary>
         /// up主名字
         /// </summary>
-        public  string Mingzi { get { return mingzi; } }
-        private  string mingzi = "";
+        public string Mingzi { get { return mingzi; } }
+        private string mingzi = "";
 
-        public  List<Shiping_dan> shiping_liebiao = new List<Shiping_dan>();
+        public List<Shiping_dan> shiping_liebiao = new List<Shiping_dan>();
         /// <summary>
         /// 粉丝数
         /// </summary>
-        public  string Fenshishu { get { return fenshishu; } }
-        private  string fenshishu = "";
+        public string Fenshishu { get { return fenshishu; } }
+        private string fenshishu = "";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
         /// 首个视频名字 以下省略
         /// </summary>
-        public  string Shiping_mingzi_shou { get { if (shiping_liebiao.Count != 0) {return shiping_liebiao[0].Shiping_mingzi_shou; } else { return ""; } } }
+        public string Shiping_mingzi_shou { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Shiping_mingzi_shou; } else { return ""; } } }
         /// <summary>
         /// 播放数
         /// </summary>
-        public  string Bofanshu { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Bofanshu; } else { return ""; } } }
+        public string Bofanshu { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Bofanshu; } else { return ""; } } }
         /// <summary>
         /// 点赞
         /// </summary>
-        public  string Dianzan { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Dianzan; } else { return ""; } } }
+        public string Dianzan { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Dianzan; } else { return ""; } } }
         /// <summary>
         /// 投币
         /// </summary>
-        public  string Toubi { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Toubi; } else { return ""; } } }
+        public string Toubi { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Toubi; } else { return ""; } } }
         /// <summary>
         /// 收藏
         /// </summary>
-        public  string Shoucang { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Shoucang; } else { return ""; } } }
+        public string Shoucang { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Shoucang; } else { return ""; } } }
         /// <summary>
         /// 评论
         /// </summary>
-        public  string Pinglun { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Pinglun; } else { return ""; } } }
+        public string Pinglun { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Pinglun; } else { return ""; } } }
         /// <summary>
         /// 弹幕
         /// </summary>
-        public  string Danmu { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Danmu; } else { return ""; } } }
+        public string Danmu { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Danmu; } else { return ""; } } }
         /// <summary>
         /// 分享
         /// </summary>
-        public  string Fenxiang { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Fenxiang; } else { return ""; } } }
+        public string Fenxiang { get { if (shiping_liebiao.Count != 0) { return shiping_liebiao[0].Fenxiang; } else { return ""; } } }
         /// <summary>
         /// 使用给定uuid刷新数据
         /// </summary>
         /// <param name="uuid">用户id</param>
-        public  void shuaxin_shuju(string uuid,string[] cook)
+        public void shuaxin_shuju(string uuid, string[] cook)
         {
             //清空
             shiping_liebiao.Clear();
 
             //获取视频列表
-            string serviceAddress = "https://api.bilibili.com/x/space/arc/search?mid="+uuid+"&ps=10&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp"; //请求地址
-            string retString = gongju.http_get(serviceAddress,cook);
+            string serviceAddress = "https://api.bilibili.com/x/space/arc/search?mid=" + uuid + "&ps=10&tid=0&pn=1&keyword=&order=pubdate&jsonp=jsonp"; //请求地址
+            string retString = gongju.http_get(serviceAddress, cook);
 
             //解析json 需要的信息 视频列表 视频id
             var wai = (JObject)JsonConvert.DeserializeObject(retString);
             var json_liebiao = wai["data"]["list"]["vlist"].Children().ToArray();
-            foreach (var item in json_liebiao)
-            {
-                Shiping_dan shiping_ = new Shiping_dan();
-                shiping_.chushihua(item["bvid"].ToString(),cook);
-                shiping_liebiao.Add(shiping_);
-            }
+
+            Shiping_dan shiping_ = new Shiping_dan();
+            shiping_.chushihua(json_liebiao[0]["bvid"].ToString(), cook);
+            shiping_liebiao.Add(shiping_);
+
 
             //获取up主名字
             mingzi = json_liebiao[0]["author"].ToString();

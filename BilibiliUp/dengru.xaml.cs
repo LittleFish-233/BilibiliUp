@@ -41,6 +41,8 @@ namespace BilibiliUp
 
         private void Dengru_Loaded(object sender, RoutedEventArgs e)
         {
+            //透明度
+            rec1.Opacity = daima.Peizhi.Toumingdu;
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(900);
             timer.Tick += timer1_Tick;
@@ -60,11 +62,9 @@ namespace BilibiliUp
             {
                 //写入
                 daima.Peizhi.xieru_dengru(jieguo[0], jieguo[1], jieguo[2], jieguo[3],jieguo[4]);
-                //新建
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
                 //关闭窗口
                 this.Close();
+                
             }
             
             //判断是否重新获取
